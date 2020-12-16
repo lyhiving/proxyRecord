@@ -9,8 +9,24 @@
 
 
 ## 使用
-####  待补充
+####  1.数据库初始化配置
+* 创建数据库webproxy 【如非webproxy，后续mysql连接也需要同步修改】
+* 导入sqltable中的表结构 【auth.sql,hostname.sql,proxy.sql,session.sql,sessioncheck.sql】
+  
+#### 2.代理审计配置 【proxyapp/libs/dbdriver.js】
+```
+// 创建数据池
+const pool  = mysql.createPool({
+  host     : '127.0.0.1',   // 数据库地址
+  user     : 'root',    // 数据库用户
+  password : '123456',   // 数据库密码
+  database : 'webproxy'  // 选中数据库
+})
+```
 
+
+#### 3.管理页面后台配置 
+* 同2
 
 ## 部分截图
 ![](./images/dashboard.jpg)
