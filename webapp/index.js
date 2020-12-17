@@ -15,26 +15,54 @@ const port = 3000
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
+WhiteURL=['/api/login'];
 //登录拦截器
 app.all('/*', async (req, res, next)=>{
-    //1,先判断允许静态数据访问
-    // if(tools.checkhouzhui(req)){
-    //     next();
-    // }
-
-    remote_addr = req.connection.remoteAddress
-    var data = await auth.checkLogin(remote_addr);
-    if (data.length == 0) {
+    //白名单无需登录
+    if(WhiteURL.indexOf(req.url)!=-1){
+        return next();
+    }
+    //先验证登录态，判断登录态度
+    var ret=await auth.checkToken(req);
+    if (ret==false) {
         return res.json({
             status: 403,
-            data: '请先联系yuwenqun050@pingan.com.cn登记ip后再访问'
+            data: '请登录'
         });
     } else {
-        app.set('author',data[0])
+        app.set('author',ret[0])
         next();
     }
 });
 
+//登录校验账号密码的操作
+app.post('/api/login',async (req, res) => {
+    if (req.body.hasOwnProperty('username')) {
+        var username = req.body.username;
+    } else {
+        var username = '';
+    }
+    if (req.body.hasOwnProperty('password')) {
+        var password = req.body.password;
+    } else {
+        var password = '';
+    }
+
+    var ret=await auth.checkusername_password(username,password);
+    if(ret==false){
+        //账号密码错误则返回登录失败的信息
+        return  res.json({
+            status: 403,
+            data: '账号密码错误'
+        });
+    }else{
+        //登录成功
+        return  res.json({
+            status: 200,
+            data: ret
+        });
+    }
+})
 
 app.get('/', (req, res) => res.send('Hello World!'))
 

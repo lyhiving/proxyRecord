@@ -4,10 +4,10 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
 const cdn = {
   js: [
-    'https://lib.baomitu.com/vue/2.6.11/vue.min.js',
-    'https://lib.baomitu.com/vue-router/3.2.0/vue-router.min.js',
-    'https://lib.baomitu.com/vuex/3.5.1/vuex.min.js',
-    'https://lib.baomitu.com/axios/0.20.0/axios.min.js'
+    // 'https://lib.baomitu.com/vue/2.6.11/vue.min.js',
+    // 'https://lib.baomitu.com/vue-router/3.2.0/vue-router.min.js',
+    // 'https://lib.baomitu.com/vuex/3.5.1/vuex.min.js',
+    // 'https://lib.baomitu.com/axios/0.20.0/axios.min.js'
   ]
 }
 
@@ -57,10 +57,10 @@ module.exports = {
       )
       Object.assign(config, {
         externals: {
-          'vue': 'Vue',
-          'vue-router': 'VueRouter',
-          'vuex': 'Vuex',
-          'axios': 'axios'
+          // 'vue': 'Vue',
+          // 'vue-router': 'VueRouter',
+          // 'vuex': 'Vuex',
+          // 'axios': 'axios'
         }
       })
     }

@@ -20,6 +20,7 @@ service.interceptors.request.use(
   config => {
     config.baseURL = API
     config.headers['Content-Type'] = 'application/json' // 请求的数据格式为 json
+    config.headers['Authorization'] = getToken()
     return config
   },
   error => {
