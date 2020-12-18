@@ -9,6 +9,19 @@
 
 
 ## 使用
+####  0.安装
+```
+git clone https://github.com/yu2lulu/proxyRecord.git
+cd proxyapp
+npm install
+
+cd webapp
+npm install
+
+cd webtemplates
+npm install
+
+```
 ####  1.数据库初始化配置
 * 创建数据库webproxy 【如非webproxy，后续mysql连接也需要同步修改】
 * 导入sqltable中的表结构 【auth.sql,hostname.sql,proxy.sql,session.sql,sessioncheck.sql】
@@ -27,6 +40,7 @@ const pool  = mysql.createPool({
 
 #### 3.管理页面后台配置 
 * 同2
+
 
 ## 部分截图
 ![](./images/dashboard.jpg)

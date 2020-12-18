@@ -35,20 +35,20 @@ service.interceptors.response.use(
     const data = response.data
     const code = data.code
     const message = data.msg
-    if(data.status==403){
-      // return this.$router.push('/error-page/page-401')
-      window.location.href="/#/error-page/page-401"
-      return {
-        status:403
-      }
-    }
-    if(data.status==404){
-      // return this.$router.push('/error-page/page-404')
-      window.location.href="/#/error-page/page-404"
-      return {
-        status:404
-      }
-    }
+    // if(data.status==403){
+    //   // return this.$router.push('/error-page/page-401')
+    //   window.location.href="/#/error-page/page-401"
+    //   return {
+    //     status:403
+    //   }
+    // }
+    // if(data.status==404){
+    //   // return this.$router.push('/error-page/page-404')
+    //   window.location.href="/#/error-page/page-404"
+    //   return {
+    //     status:404
+    //   }
+    // }
     // if (code === 0) {
       return data
     // } else {

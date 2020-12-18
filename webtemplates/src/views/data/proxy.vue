@@ -37,7 +37,12 @@
           type="index"
           :index="index"
         />
-        <el-table-column prop="remoteAddress" label="源IP" align="left" width="120"/>
+        <el-table-column
+          prop="remoteAddress"
+          label="源IP"
+          align="left"
+          width="120"
+        />
         <el-table-column prop="method" label="方法" align="left" width="60" />
         <el-table-column
           prop="responseCode"
@@ -46,8 +51,12 @@
           width="70"
         >
           <template slot-scope="props">
-            <p v-if="props.row.responseCode=='200'"><font color="green">200</font></p>
-            <p v-else><font color="red">{{ props.row.responseCode }}</font></p>
+            <p v-if="props.row.responseCode == '200'">
+              <font color="green">200</font>
+            </p>
+            <p v-else>
+              <font color="red">{{ props.row.responseCode }}</font>
+            </p>
           </template>
         </el-table-column>
         <el-table-column prop="hostname" label="主机名" align="left" />
@@ -298,7 +307,14 @@ export default {
       this.detail.responseCode = row.responseCode;
       this.detail.responseHeaders = JSON.parse(row.responseHeaders);
       this.detail.responseData = row.responseData;
-      this.detail.Cookies = this.split_cookies(JSON.parse(row.headers).Cookie);
+      try {
+        this.detail.Cookies = this.split_cookies(
+          JSON.parse(row.headers).Cookie
+        );
+      } catch (e) {
+        this.detail.Cookies = this.split_cookies("");
+      }
+
       this.dialogDetail = true;
     },
   },
