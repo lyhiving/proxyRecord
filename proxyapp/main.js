@@ -1,7 +1,7 @@
-const sensive_rule = require('./rules/sensive_rule')
+const sensive_rule = require('../rules/sensive_rule')
 const dbutils = require('./methods/dbutils')
 const tools = require('./methods/tools')
-const filescan = require('./rules/filescan')
+const filescan = require('../rules/filescan')
 const path = require('path')
 const { hostname } = require('os')
 const { url } = require('inspector')
@@ -39,7 +39,8 @@ function getRemoteAddress(add1,add2){
 }
 
 async function requestMain(requestDetail,responseDetail) {
-    var rip=getRemoteAddress(requestDetail._req.socket.remoteAddress,requestDetail._req.connection.remoteAddress)
+    // var rip=getRemoteAddress(requestDetail._req.socket.remoteAddress,requestDetail._req.connection.remoteAddress)
+    var rip=getRemoteAddress(requestDetail.requestOptions.headers['remoteAddress'],requestDetail._req.connection.remoteAddress)  //将请求头保存的信息去获取ip
     req_hostname = requestDetail.requestOptions.hostname;
     req_port = requestDetail.requestOptions.port;
     req_url_path = requestDetail.requestOptions.path;

@@ -2,9 +2,14 @@ const Main=require('./main')
 module.exports = {
   // 模块介绍
   summary: 'my customized rule for AnyProxy',
+  remoteAddress:undefined,
   // 发送请求前拦截处理
-  *beforeSendRequest(requestDetail) {
-    
+  *beforeSendRequest(requestDetail) {  //发送请求包前添加header头，并且增加remoteAddress的值,这样请求头就会增加原始的客户端请求的ip地址了
+    const newRequestOptions = requestDetail.requestOptions;
+    newRequestOptions.headers['remoteAddress'] = this.remoteAddress;
+    return {
+      requestOptions: newRequestOptions
+    };
     // 
     
 
@@ -23,6 +28,7 @@ module.exports = {
    },
   // 是否处理https请求
   *beforeDealHttpsRequest(requestDetail) { 
+    this.remoteAddress = requestDetail._req.connection.remoteAddress;  //https请求时将原始的客户端ip保存到remoteAddress变量
 	  return true;
   },
   // 请求出错的事件
